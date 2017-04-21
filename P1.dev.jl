@@ -1,13 +1,14 @@
 # cf https://github.com/JuliaOpt/JuMP.jl/tree/master/examples
 
 using JuMP
-using Clp
+using Cbc		
 
+include("Instance.jl")
 include("read_instance.jl")
 instance = read_instance("instances/1.out")
 
 # Model
-m = Model(solver = ClpSolver())
+m = Model(solver = CbcSolver())
 
 # Variables
 @variable(m, y[1:instance.n], Bin) # (6)
@@ -26,9 +27,9 @@ for i = 1:instance.n
   end
 end
 
-@constraint(m, sum(y[i] for i=1:instance.n) <= p) # (5)
+@constraint(m, sum(y[i] for i=1:instance.n) <= instance.p) # (5)
 
 # Resolution
-print(m)
+#print(m)
 status = solve(m)
 println("Objective value: ", getobjectivevalue(m))
