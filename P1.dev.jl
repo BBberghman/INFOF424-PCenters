@@ -1,13 +1,13 @@
 # cf https://github.com/JuliaOpt/JuMP.jl/tree/master/examples
 
 using JuMP
-using Clp
+using Cbc		
 
 include("read_instance.jl")
 instance = read_instance("instances/1.out")
 
 # Model
-m = Model(solver = ClpSolver())
+m = Model(solver = CbcSolver())
 
 # Variables
 @variable(m, y[1:instance.n], Bin) # (6)
