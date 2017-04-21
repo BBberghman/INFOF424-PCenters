@@ -13,7 +13,7 @@ function read_instance(path)
   p = parse(Int64, split(lines[2], ":")[2])
   println("p: $p")
 
-  d = zeros(Int64, n,n)
+  d = zeros(Int64,n,n)
   offset = 3
   for i = 1:n
     line_splitted = split(lines[i+offset], "\t")
@@ -22,6 +22,16 @@ function read_instance(path)
       d[i, j] = parse(Int64, line_splitted[j])
     end
   end
+  
+  K = parse(Int64, split(lines[n+offset+3], ":")[2])
+  println("K: $K")
+  
+  rho = zeros(Int64, K)
+  offset2 = n+offset+5
+  for i = 1:K
+	rho[i] = parse(Int64, lines[i+offset2])
+	#println(rho[i])
+  end
 
-  return Instance(n,p,d)
+  return Instance(n,p,d,K,rho)
 end
