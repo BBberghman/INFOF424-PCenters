@@ -11,13 +11,13 @@ function read_instance(path)
   println("N: $n")
 
   p = parse(Int64, split(lines[2], ":")[2])
-  println("p: $n")
+  println("p: $p")
 
   d = zeros(Int64, n,n)
   offset = 3
-  for i=1:n
+  for i = 1:n
     line_splitted = split(lines[i+offset], "\t")
-    for j=1:n
+    for j = 1:n
       #println(line_splitted[j])
       d[i, j] = parse(Int64, line_splitted[j])
     end
