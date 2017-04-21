@@ -26,9 +26,9 @@ for i = 1:instance.n
   end
 end
 
-@constraint(m, sum(y[i] for i=1:instance.n) <= p) # (5)
+@constraint(m, sum(y[i] for i=1:instance.n) <= instance.p) # (5)
 
 # Resolution
-print(m)
+#print(m)
 status = solve(m)
 println("Objective value: ", getobjectivevalue(m))
