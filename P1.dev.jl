@@ -3,6 +3,7 @@
 using JuMP
 using Cbc		
 
+include("Instance.jl")
 include("read_instance.jl")
 instance = read_instance("instances/1.out")
 
