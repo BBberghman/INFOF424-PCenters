@@ -1,0 +1,108 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm]{geometry}
+\usepackage{parskip}
+\usepackage{eurosym}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{positioning}
+
+\usepackage{csvsimple}
+
+% 1
+\begin{filecontents*}{1_1_alg.csv}
+initialsolution,neighbourhood,pivotingrule,ARCD,ACT
+Random,Exchange,Best,36.50,23.43
+Random,Exchange,First,42.66,9.70
+\end{filecontents*}
+
+
+%%%
+%%%
+%%%
+\title{INFO-F424 - Combinatorial Optimization\\Project - The $p$-Center Problem}
+\date{\vspace{-3ex}
+Erica \textsc{Berghman} \\
+Charles \textsc{Hamesse} \\
+~\\
+École Polytechnique de Bruxelles\\
+\vspace{6ex}May 2017\vspace{4ex}}
+\begin{document}
+
+
+% You must implement these formulations in Julia language combined with JuMP package.
+% You must prepare a project report written in LATEX. In this report you should describe the mathematical formulations referenced above (explaining the meaning of each variable and constraint set), describe the computational experiments, and discuss the results. Performance of the implementation is also taken into consideration in the grading.
+
+\maketitle
+\begin{abstract}
+    The purpose of this project is to implement two formulations of the same combinatorial optimization problem in Julia, using the JuMP package. We will start by describing the mathematical aspects of both formulations, then we will explain our implementations and discuss their performance.\vspace{2ex}
+\end{abstract}
+
+\tableofcontents
+\pagebreak
+
+% You must send the report and code to guillerme.duvillie@ulb.ac.be and leave a physical copy at the Secr ́etariat des E ́tudiants du D ́epartment d’Informatique at the 8th floor of the NO building, by 8th of May.
+
+% Ease of use (read/write on the standard input, options, CLI, etc) is taken into consideration in the grading 
+
+%%%
+%%%	
+%%%
+\section{Introduction}
+
+\subsection{Implementation}
+
+\subsection{Compiling and running}
+ 
+\paragraph{Compiling}
+
+\paragraph{Running}
+Some example runs:
+\begin{lstlisting}
+code
+\end{lstlisting}
+
+%%%
+%%%
+%%%
+\section{Daskin (1995)}
+	\subsection{Description}
+		
+	\subsection{Implementation}
+		
+	\subsection{Results}
+	Example table:
+    \begin{center}
+    \begin{tabular}{l|l|l|r|r}%
+    \bfseries Initial solution & \bfseries Neighbourhood & 
+    \bfseries Pivoting rule & \bfseries ARCD & \bfseries ACT \\ \hline% specify table head
+    \csvreader[head to column names]{1_1_alg.csv}{}% use head of csv as column names
+    {\initialsolution & \neighbourhood & \pivotingrule & \ARCD & \ACT \\}% specify your coloumns here
+    \end{tabular}
+    \end{center}
+    
+    
+\section{Calik and Tansel (2013)}
+	\subsection{Description}
+		
+	\subsection{Implementation}
+		
+	\subsection{Results}
+    
+%%%
+%%%
+%%%
+
+\section{Conclusion}
+	\subsection{Comparison of the two formulations}
+	\subsection{Wrap-up}
+	
+
+\end{document}
+
+
+
+

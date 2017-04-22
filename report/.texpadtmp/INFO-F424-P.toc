@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Implementation}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Compiling and running}{2}{subsection.1.2}
+\contentsline {paragraph}{Compiling}{2}{section*.2}
+\contentsline {paragraph}{Running}{2}{section*.3}
+\contentsline {section}{\numberline {2}Daskin (1995)}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Description}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Implementation}{2}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Results}{2}{subsection.2.3}
+\contentsline {section}{\numberline {3}Calik and Tansel (2013)}{2}{section.3}
+\contentsline {subsection}{\numberline {3.1}Description}{2}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Implementation}{2}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Results}{2}{subsection.3.3}
+\contentsline {section}{\numberline {4}Conclusion}{2}{section.4}
+\contentsline {subsection}{\numberline {4.1}Comparison of the two formulations}{2}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Wrap-up}{2}{subsection.4.2}

@@ -1,0 +1,13 @@
+initialsolution,neighbourhood,pivotingrule,ARCD,ACT
+Random,Exchange,Best,36.50,23.43
+Random,Exchange,First,42.66,9.70
+Random,Insert,Best,3.57,24489.42
+Random,Insert,First,4.20,7666.12
+Random,Transpose,Best,37.57,108.45
+Random,Transpose,First,28.59,72.03
+Simplified-RZ,Exchange,Best,4.32,106.67
+Simplified-RZ,Exchange,First,4.35,105.55
+Simplified-RZ,Insert,Best,2.29,6782.88
+Simplified-RZ,Insert,First,3.58,3176.73
+Simplified-RZ,Transpose,Best,4.16,112.37
+Simplified-RZ,Transpose,First,4.31,109.22
