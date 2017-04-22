@@ -1,3 +1,5 @@
+# cf https://github.com/JuliaOpt/JuMP.jl/tree/master/examples
+
 using JuMP
 using Clp
 

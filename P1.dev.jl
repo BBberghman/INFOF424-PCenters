@@ -1,7 +1,5 @@
-# cf https://github.com/JuliaOpt/JuMP.jl/tree/master/examples
-
 using JuMP
-using Cbc		
+using Cbc
 
 include("Instance.jl")
 include("read_instance.jl")
@@ -21,13 +19,13 @@ m = Model(solver = CbcSolver())
 
 # Constraints
 for i = 1:instance.n
-  @constraint(m, sum(x[i,j] for j=1:instance.n) == 1) # (3)
+  @constraint(m, sum(x[i,j] for j = 1:instance.n) == 1) # (3)
   for j = 1:instance.n
     @constraint(m, x[i,j] <= y[j]) # (4)
   end
 end
 
-@constraint(m, sum(y[i] for i=1:instance.n) <= instance.p) # (5)
+@constraint(m, sum(y[i] for i = 1:instance.n) <= instance.p) # (5)
 
 # Resolution
 #print(m)
