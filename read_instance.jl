@@ -23,9 +23,8 @@ function read_instance(path)
   println("K: $K")
 
   rho = zeros(Int64, K)
-  offset2 = n+offset+5
   for i = 1:K
-	   rho[i] = parse(Int64, lines[i+offset2])
+	   rho[i] = parse(Int64, lines[i+n+offset+5])
   end
 
   return PCInstance(n,p,d,K,rho)
