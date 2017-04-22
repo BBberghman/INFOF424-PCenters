@@ -1,12 +1,9 @@
-# TODO
-# Choose integer types wisely
+include("PCInstance.jl")
 
-# Read
 function read_instance(path)
   file = open(path)
   lines = readlines(file)
 
-  # Parse
   n = parse(Int64, split(lines[1], ":")[2])
   println("N: $n")
 
@@ -18,20 +15,18 @@ function read_instance(path)
   for i = 1:n
     line_splitted = split(lines[i+offset], "\t")
     for j = 1:n
-      #println(line_splitted[j])
       d[i, j] = parse(Int64, line_splitted[j])
     end
   end
-  
+
   K = parse(Int64, split(lines[n+offset+3], ":")[2])
   println("K: $K")
-  
+
   rho = zeros(Int64, K)
   offset2 = n+offset+5
   for i = 1:K
-	rho[i] = parse(Int64, lines[i+offset2])
-	#println(rho[i])
+	   rho[i] = parse(Int64, lines[i+offset2])
   end
 
-  return Instance(n,p,d,K,rho)
+  return PCInstance(n,p,d,K,rho)
 end

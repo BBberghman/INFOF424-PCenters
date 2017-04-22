@@ -1,7 +1,7 @@
 using JuMP
 using Cbc
 
-include("Instance.jl")
+include("PCInstance.jl")
 include("read_instance.jl")
 instance = read_instance("instances/1.out")
 
@@ -14,9 +14,6 @@ m = Model(solver = CbcSolver())
 @variable(m, z)
 
 # Objective
-# TODO: define objective properly (max value of sums, not sum of sums)
-# draft: maximum(sum(instance.d[i][j] * x[i][j] for j=1:instance.n) for i=1:instance.n))
-# working non-solution: sum(sum(instance.d[i,j] * x[i,j] for j = 1:instance.n) for i = 1:instance.n)
 @objective(m, Min, z)  # (1)
 
 # Constraints
@@ -31,6 +28,5 @@ end
 @constraint(m, sum(y[i] for i = 1:instance.n) <= instance.p) # (5)
 
 # Resolution
-#print(m)
 status = solve(m)
 println("Objective value: ", getobjectivevalue(m))
