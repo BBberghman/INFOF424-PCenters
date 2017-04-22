@@ -18,16 +18,11 @@ m = Model(solver = CbcSolver())
 #Parameter a
 a = zeros(instance.n, instance.n, instance.K)
 
-#	instance.d[i,j] <= instance.rho[k] ? a[i,j,k] = 1 : nothing	# parameter a
-
-
 # Constraints
 for i = 1:instance.n
   for k = 1:instance.K
     for j = 1:instance.n
-		if (instance.d[i,j] <= instance.rho[k])
-			a[i,j,k] = 1
-		end 
+		instance.d[i,j] <= instance.rho[k] ? a[i,j,k] = 1 : nothing
 	end
     @constraint(m, sum(a[i,j,k] * y[j] for j = 1:instance.n) >= z[k]) # (15)
   end
