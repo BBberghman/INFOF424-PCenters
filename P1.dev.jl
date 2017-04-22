@@ -15,7 +15,7 @@ m = Model(solver = CbcSolver())
 # Objective
 # TODO: define objective properly (max value of sums, not sum of sums)
 # draft: maximum(sum(instance.d[i][j] * x[i][j] for j=1:instance.n) for i=1:instance.n))
-@objective(m, Min, sum(sum(instance.d[i,j] * x[i,j] for j=1:instance.n) for i=1:instance.n))  # (1), (2)
+@objective(m, Min, sum(sum(instance.d[i,j] * x[i,j] for j = 1:instance.n) for i = 1:instance.n))  # (1), (2)
 
 # Constraints
 for i = 1:instance.n
