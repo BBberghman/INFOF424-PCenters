@@ -69,8 +69,44 @@ code
 %%%
 %%%
 \section{Daskin (1995)}
+	This is the formulation referred to as (P1) in the original paper.
+	
 	\subsection{Description}
-		
+	According to the usual canvas, the mathematical formulation is given as follows.
+	\paragraph{Variables} Three variables are used in this formulation:
+	\begin{eqnarray*}
+		y_j &=& \begin{cases}
+ 				1 ~~\text{if vertex $j$ is a center} \\
+ 				0 ~~\text{otherwise}
+ 			\end{cases} \\
+ 		x_{ij} &=& \begin{cases}
+ 				1 ~~\text{if vertex $i$ assigns to a center in vertex $j$} \\
+ 				0 ~~\text{otherwise}
+ 			\end{cases} \\
+ 		p &=& \text{maximum number of centers}
+	\end{eqnarray*}
+	Both indices $i$ and $j$ have a range of $[1, N]$ where $N$ is the number of vertices of the instance. 
+	
+	\paragraph{Objective function}
+	\begin{eqnarray}
+		min && z\\
+		\text{s.t.}~~~ \sum_{j \in N} d_{ij} x_{ij} &\leq& z 
+	\end{eqnarray}
+	These two expressions ensure that the objective value is no less than the maximum vertex-to-center distance, which we want to minimize. Note that (2) is actually implemented as a constraint but shown here for the sake of readability.
+	
+	\paragraph{Constraints}
+	\begin{eqnarray}
+		\sum_{j \in N} x_{ij} &=& 1 ~~\forall i \in N \\
+		x_{ij} &\leq& y_i ~~\forall i,j \in N \\
+		\sum_{j \in N} y_j &\leq& p \\
+		y_j &\in& \{ 0,1 \} ~~\forall j \in N \\
+		x_{ij} &\in& \{0 , 1 \} ~~\forall i,j \in N 
+	\end{eqnarray}
+	
+	Constraint (3) assigns each vertex to exactly one center.
+	Constraint (4) ensures that no vertex assigns to $v_j$ unless there is a center at $v_j$. 
+	Constraint (5) restricts the number of centers to $p$.
+	Constraints (6) and (7) are the binary restrictions for variables $x$ and $y$. 
 	\subsection{Implementation}
 		
 	\subsection{Results}
@@ -86,6 +122,7 @@ code
     
     
 \section{Calik and Tansel (2013)}
+	This is the formulation referred to as (P3) in the original paper.
 	\subsection{Description}
 		
 	\subsection{Implementation}
