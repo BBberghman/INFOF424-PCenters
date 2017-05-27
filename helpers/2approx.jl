@@ -47,7 +47,7 @@ function make2approx(instance)
   for i = centers
       solution[i] = 1;
   end
-    
+
   return solution
 
 end

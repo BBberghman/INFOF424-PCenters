@@ -1,16 +1,22 @@
 using JuMP
-using Cbc
+using Gurobi
 
 include("helpers/PCInstance.jl")
 include("helpers/read_instance.jl")
 include("helpers/print.jl")
+include("helpers/random.jl")
+include("helpers/2approx.jl")
 instance = read_instance("instances/1.out")
 
+# Initial candidate
+initial_candidate = make2approx(instance)
+
 # Model
-m = Model(solver = CbcSolver())
+m = Model(solver = GurobiSolver())
 
 # Variables
 @variable(m, y[1:instance.n], Bin) # (6)
+setvalue(y, initial_candidate)
 @variable(m, x[1:instance.n, 1:instance.n], Bin) # (7)
 @variable(m, z)
 
