@@ -14,8 +14,7 @@ function make2approx(instance)
 
     # for all rows (vertices)
     for i = 1:instance.n
-      if in(i, centers) # negation?
-      else
+      if !in(i, centers) 
         # get the min distance from all assigned centers
         inner_min = typemax(Int64) # integer max value
         for j = centers
