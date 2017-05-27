@@ -26,14 +26,18 @@ for i = 1:instance.n
 end
 
 @constraint(m, sum(y[j] for j = 1:instance.n) <= instance.p) # (5)
+@constraint(m, sum(y[j] for j = 1:instance.n) >= 1) # (4')
 
 # Resolution
+tic();
 status = solve(m)
 println("Objective value: ", getobjectivevalue(m))
+toc();
 
 y2 = getvalue(y)
 for i = 1:instance.n 
+	println("y = 1, index: " )
 	if (y2[i] == 1)
-		println("y = 1, index :", i)
+		println(i,", ")
 	end
 end
