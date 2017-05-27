@@ -6,8 +6,4 @@ include("functions.jl")
 
 solution = random_heuristic(instance.p, instance.n)
 
-for i = 1:instance.n 
-	if (solution[i] == 1)
-		println("y = 1, index: ", i )
-	end
-end
+print_solution(solution)
