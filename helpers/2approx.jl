@@ -41,6 +41,13 @@ function make2approx(instance)
     nleft -= 1
   end
 
-  return centers
+  # write solution
+  solution = fill(0,instance.n);
+
+  for i = centers
+      solution[i] = 1;
+  end
+    
+  return solution
 
 end
