@@ -1,12 +1,14 @@
 using JuMP
-using Cbc
+using Gurobi
 
+
+println("Running P3..")
 include("PCInstance.jl")
 include("read_instance.jl")
 instance = read_instance("instances/1.out")
 
 # Model
-m = Model(solver = CbcSolver())
+m = Model(solver = GurobiSolver())
 
 # Variables
 @variable(m, y[1:instance.n], Bin) # (18)
@@ -17,7 +19,6 @@ m = Model(solver = CbcSolver())
 
 #Parameter a
 a = zeros(instance.n, instance.n, instance.K)
-zq = 0
 
 # Constraints
 for i = 1:instance.n
@@ -25,8 +26,7 @@ for i = 1:instance.n
     for j = 1:instance.n
 		instance.d[i,j] <= instance.rho[k] ? a[i,j,k] = 1 : nothing
 	end
-    zq = z[k] + zq
-    @constraint(m, sum(a[i,j,k] * y[j] for j = 1:instance.n) >= zq) # (22)
+    @constraint(m, sum(a[i,j,k] * y[j] for j = 1:instance.n) >= z[k]) # (15)
   end
 end
 
@@ -37,7 +37,7 @@ end
 status = solve(m)
 println("Objective value: ", getobjectivevalue(m))
 
-for i = 1:instance.n 
+for i = 1:instance.n
 	if (y[i] == 1)
 		println("y = 1, index :", i)
 	end

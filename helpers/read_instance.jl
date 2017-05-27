@@ -1,5 +1,3 @@
-include("PCInstance.jl")
-
 function read_instance(path)
   file = open(path)
   lines = readlines(file)

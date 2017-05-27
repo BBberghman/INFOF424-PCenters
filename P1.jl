@@ -1,12 +1,17 @@
 using JuMP
-using Cbc
+using Gurobi
 
-include("PCInstance.jl")
-include("read_instance.jl")
+include("helpers/PCInstance.jl")
+include("helpers/read_instance.jl")
+include("helpers/2approx.jl")
 instance = read_instance("instances/1.out")
 
+initial_candidate = make2approx(instance)
+print(initial_candidate)
+
+if false
 # Model
-m = Model(solver = CbcSolver())
+m = Model(solver = GurobiSolver())
 
 # Variables
 @variable(m, y[1:instance.n], Bin) # (6)
@@ -32,8 +37,9 @@ status = solve(m)
 println("Objective value: ", getobjectivevalue(m))
 
 y2 = getvalue(y)
-for i = 1:instance.n 
+for i = 1:instance.n
 	if (y2[i] == 1)
 		println("y = 1, index :", i)
 	end
+end
 end
