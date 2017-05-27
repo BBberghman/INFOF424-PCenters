@@ -3,8 +3,9 @@ using Gurobi
 
 
 println("Running P3..")
-include("PCInstance.jl")
-include("read_instance.jl")
+include("helpers/PCInstance.jl")
+include("helpers/read_instance.jl")
+include("helpers/print.jl")
 instance = read_instance("instances/1.out")
 
 # Model
@@ -37,8 +38,5 @@ end
 status = solve(m)
 println("Objective value: ", getobjectivevalue(m))
 
-for i = 1:instance.n
-	if (y[i] == 1)
-		println("y = 1, index :", i)
-	end
-end
+y2 = getvalue(y)
+print_solution(y2)

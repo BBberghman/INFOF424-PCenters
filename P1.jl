@@ -1,8 +1,9 @@
 using JuMP
 using Cbc
 
-include("PCInstance.jl")
-include("read_instance.jl")
+include("helpers/PCInstance.jl")
+include("helpers/read_instance.jl")
+include("helpers/print.jl")
 instance = read_instance("instances/1.out")
 
 # Model
@@ -35,9 +36,4 @@ println("Objective value: ", getobjectivevalue(m))
 toc();
 
 y2 = getvalue(y)
-for i = 1:instance.n 
-	println("y = 1, index: " )
-	if (y2[i] == 1)
-		println(i,", ")
-	end
-end
+print_solution(y2)
