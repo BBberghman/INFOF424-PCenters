@@ -10,15 +10,12 @@
 \usepackage{listings}
 \usetikzlibrary{positioning}
 
+%To be able to "escape" listings, example bold.
+\lstset{
+    escapeinside={(*}{*)}
+}
+
 \usepackage{csvsimple}
-
-% 1
-\begin{filecontents*}{1_1_alg.csv}
-initialsolution,neighbourhood,pivotingrule,ARCD,ACT
-Random,Exchange,Best,36.50,23.43
-Random,Exchange,First,42.66,9.70
-\end{filecontents*}
-
 
 %%%
 %%%
@@ -52,6 +49,7 @@ Charles \textsc{Hamesse} \\
 %%%	
 %%%
 \section{Introduction}
+% offering a decent Human Machine Interface. Note that it does not mean that I want a fancy/shiny Graphical Interface. It means, that your program should implement unix like options reading (for instance -h [or --help] for help display, -i [or --input] for file input, ...), stdin reading and stdout writing, different level of verbosity, ... Note however that the program has to be usable in a bash loop/script.
 
 \subsection{Implementation}
 
@@ -68,10 +66,10 @@ code
 %%%
 %%%
 %%%
-\section{Daskin (1995)}
+\section{Formulations}
+\subsection{Daskin (1995)}
 	This is the formulation referred to as (P1) in the original paper.
 	
-	\subsection{Description}
 	According to the usual canvas, the mathematical formulation is given as follows.
 	\paragraph{Variables} Three variables are used in this formulation:
 	\begin{eqnarray*}
@@ -106,32 +104,119 @@ code
 	Constraint (3) assigns each vertex to exactly one center.
 	Constraint (4) ensures that no vertex assigns to $v_j$ unless there is a center at $v_j$. 
 	Constraint (5) restricts the number of centers to $p$.
-	Constraints (6) and (7) are the binary restrictions for variables $x$ and $y$. 
-	\subsection{Implementation}
-		
-	\subsection{Results}
-	Example table:
-    \begin{center}
-    \begin{tabular}{l|l|l|r|r}%
-    \bfseries Initial solution & \bfseries Neighbourhood & 
-    \bfseries Pivoting rule & \bfseries ARCD & \bfseries ACT \\ \hline% specify table head
-    \csvreader[head to column names]{1_1_alg.csv}{}% use head of csv as column names
-    {\initialsolution & \neighbourhood & \pivotingrule & \ARCD & \ACT \\}% specify your coloumns here
-    \end{tabular}
-    \end{center}
+	Constraints (6) and (7) are the binary restrictions for variables $x$ and $y$.     
     
-    
-\section{Calik and Tansel (2013)}
+    \subsection{Calik and Tansel (2013)}
 	This is the formulation referred to as (P3) in the original paper.
-	\subsection{Description}
-		
-	\subsection{Implementation}
-		
-	\subsection{Results}
+	
+	%define correctly r_p(F)
+	In this formulation, we define the set $ R = \{ \rho_1, \rho_2, ..., \rho_K \}$ with $\rho_1 < \rho_2 < ... < \rho_K$. One of these values determines the value of $r_p(F)$.
+	\paragraph{Variables} Three variables are used in this formulation:
+	\begin{eqnarray*}
+		a_{ijk} &=& \begin{cases}
+ 				1 ~~\text{if $d_{ij} \leq \rho_k$} \\
+ 				0 ~~\text{otherwise}
+ 			\end{cases} \\
+		y_j &=& \begin{cases}
+ 				1 ~~\text{if vertex $j$ is a center} \\
+ 				0 ~~\text{otherwise}
+ 			\end{cases} \\
+ 		z_{k} &=& \begin{cases}
+ 				1 ~~\text{if $r_p(F) = \rho_k$} \\
+ 				0 ~~\text{otherwise}
+ 			\end{cases} \\
+ 		p &=& \text{maximum number of centers}
+	\end{eqnarray*}
+	Both indices $i$ and $j$ have a range of $[1, N]$ where $N$ is the number of vertices of the instance. 
+	
+	\paragraph{Objective function}
+	\begin{eqnarray}
+		min && \sum_{k \in T} \rho_{k} z_{k}	\end{eqnarray}
+	The objective function determines the value of $r_p(F)$ as the corresponding value $\rho_k$.
+	
+	\paragraph{Constraints}
+	\begin{eqnarray}
+    	\sum_{j \in M} a_{ijk} y_{j} &\geq& z_k ~~\forall i \in N, \forall k \in T \\
+		\sum_{j \in M} y_{j} &\leq& p \\
+		\sum_{k \in T} z_{k} &=& 1 \\
+		y_j &\in& \{ 0,1 \} ~~\forall j \in M \\
+		z_{k} &\in& \{0 , 1 \} ~~\forall k \in T 
+	\end{eqnarray}
+	
+	Constraint (9) ensures that each vertex is covered within the selected radius by at least one center.
+	Constraint (10) restricts the number of center to at most p centers.
+	Constraint (11) ensures that exactly one of the variables $z_k$ is selected. 
+	Constraints (12) and (13) are the binary restrictions for variables $y$ and $z$. 
+	
+%%%
+%%%
+
+\section{Implementation}
+
+\section{Optimization}
+\subsection{Hot starts}
+Three hot starts have been tested: a random initialization, the 2-approximation algorithms and the initialization implemented in the Gurobi Optimizer.
+
+\subsubsection{Random initialization}
+
+The random initialization simply consists on choosing $p$ points to be the centers.
+
+As this algorithm is not demanding in computational resources, this initialization is done $1000$ times and the best solution is kept as actual initial solution for the program linear.
+
+\subsubsection{2-approximation algorithm}
+
+The 2-approximation algorithm, also called the farthest-first traversal, is an heuristic that guaranties the solution will not be further away than 2 times the optimal value of the objective function if the triangular inequalities is respected. 
+
+The procedure is described in the pseudo-code here after. The first center is chosen randomly among the $n$ points. The minimal distance between each of the points left and the already chosen centers is computed: this gives us for each point the smallest distance it is located from any of the centers. This distance is then maximized in order to chose the next center. This procedure is repeated until the number of centers chosen is equal to $p$.
+
+\begin{lstlisting}[mathescape=true]
+(*\bfseries 2-approximation *) ($\pi$) :
+    (*\bfseries input: *)  problem instance $\pi$
+             the number of points $n$
+             the number of centers $p$
+    (*\bfseries output: *)  solution $sol$
     
-%%%
-%%%
-%%%
+    centers[p] = randomNumber(1,n)
+    centersToFind = p - 1
+    
+    (*\bfseries while *) (centersToFind)
+        outer_max = inf
+        centerIdx = -1
+        (*\bfseries for *) i = 1:n (*\bfseries and *) i  (*\bfseries not in *) centers :
+            inner_min = findMinDistance(centers, instance)
+            (*\bfseries if *) inner_min > outer_max
+                outer_max = inner_min
+                centerIdx = i
+            (*\bfseries end *)
+        (*\bfseries end *)
+        centers[centersToFind--] = centerIdx
+    (*\bfseries end *)
+    sol = zeros(n)
+    sol[centers] = 1
+    (*\bfseries return *) $sol$
+(*\bfseries end 2-approximation*)
+\end{lstlisting}
+
+In this case, it is not clear if the distance metric considered has the triangular inequality, this is why no assumptions on the optimally of this solution can be done.
+
+\subsubsection{Gurobi Optimizer}
+
+This one was not implemented but was still part of the one explored as it is the default one when use the Gurobi Optimizer.
+
+\subsubsection{Comparison of the heuristics}
+
+%%
+
+\subsection{Number of variables}
+\subsection{Valid inequalities}
+\subsection{Cutting planes}
+
+
+\section{Results}
+
+ Instance // Objective function // Example of solutions  // computational time (mean) //
+
+
 
 \section{Conclusion}
 	\subsection{Comparison of the two formulations}
@@ -139,7 +224,3 @@ code
 	
 
 \end{document}
-
-
-
-

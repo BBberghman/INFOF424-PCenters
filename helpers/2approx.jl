@@ -7,7 +7,7 @@ function make2approx(instance)
   centers[1] = rand(1:instance.n)
 
   # loop for all remaining centers to find
-  nleft = instance.p-1
+  nleft = instance.p - 1
   while nleft > 0
     outer_max = typemin(Int64)
     outer_max_idx = -1
@@ -25,7 +25,7 @@ function make2approx(instance)
           end
         end
 
-        # if it's farther than all others, save it
+        # if it's further than all others, save it
         if inner_min > outer_max
           outer_max = inner_min
           outer_max_idx = i
@@ -34,19 +34,17 @@ function make2approx(instance)
     end
 
     # add it to centers
-    centers[instance.p+1-nleft] = outer_max_idx
+    centers[instance.p + 1 - nleft] = outer_max_idx
 
     # decrement
     nleft -= 1
   end
 
   # write solution
-  solution = fill(0,instance.n);
+  solution = fill(0, instance.n);
 
   for i = centers
       solution[i] = 1;
   end
-
   return solution
-
 end
