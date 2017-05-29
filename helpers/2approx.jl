@@ -1,3 +1,7 @@
+function evaluate(instance, x)
+  return sum(instance.d[i,j] * x[i,j] for j = 1:instance.n)
+end
+
 function make2approx(instance)
 
   # init center list
@@ -14,7 +18,7 @@ function make2approx(instance)
 
     # for all rows (vertices)
     for i = 1:instance.n
-      if !in(i, centers) 
+      if !in(i, centers)
         # get the min distance from all assigned centers
         inner_min = typemax(Int64) # integer max value
         for j = centers

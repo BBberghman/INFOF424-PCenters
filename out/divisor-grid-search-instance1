@@ -1,0 +1,21 @@
+N: 100
+p: 5
+K: 284
+divisor: 100
+Objective value: 127.0
+elapsed time: 80.60293111 seconds
+y = 1, index: 7
+y = 1, index: 13
+y = 1, index: 66
+y = 1, index: 78
+y = 1, index: 99
+
+N: 100
+p: 5
+K: 284
+divisor: 80
+Objective value: 127.0
+elapsed time: 117.793334955 seconds
+y = 1, index: 7
+y = 1, index: 78
+y = 1, index: 94
