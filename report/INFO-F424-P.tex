@@ -71,7 +71,11 @@ code
 	This is the formulation referred to as (P1) in the original paper.
 	
 	According to the usual canvas, the mathematical formulation is given as follows.
-	\paragraph{Variables} Three variables are used in this formulation:
+	\paragraph{Parameters} 
+	\begin{eqnarray*}
+		p &=& \text{maximum number of centers} \\
+	\end{eqnarray*}
+	\paragraph{Variables} Two variables are used in this formulation:
 	\begin{eqnarray*}
 		y_j &=& \begin{cases}
  				1 ~~\text{if vertex $j$ is a center} \\
@@ -81,9 +85,9 @@ code
  				1 ~~\text{if vertex $i$ assigns to a center in vertex $j$} \\
  				0 ~~\text{otherwise}
  			\end{cases} \\
- 		p &=& \text{maximum number of centers}
 	\end{eqnarray*}
-	Both indices $i$ and $j$ have a range of $[1, N]$ where $N$ is the number of vertices of the instance. 
+	Both indices $i$ and $j$ have a range of $[1, N]$ where $N$ is the number of vertices of the instance. The parameter $p$ 	
+
 	
 	\paragraph{Objective function}
 	\begin{eqnarray}
@@ -213,7 +217,6 @@ This one was not implemented but was still part of the one explored as it is the
 
 \subsection{Number of variables}
 
-
 \paragraph{Dual problem}
 
 The first idea to diminish the number of variables is to use the dual problem. However given the number of variables and the number of constraints this is not a good idea.
@@ -225,7 +228,26 @@ The first idea to diminish the number of variables is to use the dual problem. H
     $P_3$ & $n + K$ & $nK+2$
 \end{tabular}
 
-Considering that $n$ and $K \in \N$, the \#variables < \#constraints. For $P_1$ this is obvious. For $P_2$, we have to solve the inequality $n + K > nK + 2$ in order to have an improvement in the number of variables by taking the dual. Using Wolframalpha, the solution of this inequation for n > 1 is $K = \dfrac{n-2}{n-1} < 1$. As K is an integer, the inequation is $K \leq 0$ which does not give any solution as $K > 0$ by definition.
+Considering that $n$ and $K \in \field{N}$, the \#variables $<$ \#constraints. For $P_1$ this is obvious. For $P_2$, we have to solve the inequality $n + K > nK + 2$, which would indicate that taking the dual would reduce the number of variables. Using WolframAlpha, the solution of this inequation for n $>$ 1 is $K = \dfrac{n-2}{n-1} < 1$. As K is an integer, this gives $K \leq 0$ which does not lead to any solution as $K > 0$ by definition. 
+
+\subsection{Valid inequalities}
+
+\paragraph{Chv\'atal-Gomory procedure}
+
+Procedure to construct a valid inequality for the set $ X = \{x \in R^n_{+}: Ax \leq b \} \cap Z^n$, where $A$ is a $m \times n$ matrix with columns \{$a_j$, j = 1, \ldots, n\}:	
+\begin{eqnarray*}
+    \sum_{j=1}^n \left \lfloor{ua_j}\right \rfloor x_j & \leq & ub ~~ \text{where $u \in R^m_{+}$ and $x \geq 0$ is valid for P.}
+\end{eqnarray*}
+
+This inequation is used in constraint \ref{eq:2} of the $P_1$ formulation with a factor called $divisor$.
+ 
+	\begin{eqnarray}
+	 \sum_{j \in N} \left \lfloor{d_{ij}/divisor}\right \rfloor x_{ij} &\leq& z/divisor \label{eq:2_VI}
+	\end{eqnarray}
+
+With Gurobi there is not much improvement. However with another solver as Cbc we can see an improvement in the computational time. 
+
+\subsection{Cutting planes}
 
 
 \section{Results}
