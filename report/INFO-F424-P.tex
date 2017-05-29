@@ -212,8 +212,20 @@ This one was not implemented but was still part of the one explored as it is the
 %%
 
 \subsection{Number of variables}
-\subsection{Valid inequalities}
-\subsection{Cutting planes}
+
+
+\paragraph{Dual problem}
+
+The first idea to diminish the number of variables is to use the dual problem. However given the number of variables and the number of constraints this is not a good idea.
+
+\begin{tabular}{c|c|c}
+    Formulation & \# variables & \# constraints \\
+    \hline
+    $P_1$ & $n^2 + n + 1$ & $n^2 + 2n + 2$ \\
+    $P_3$ & $n + K$ & $nK+2$
+\end{tabular}
+
+Considering that $n$ and $K \in \N$, the \#variables < \#constraints. For $P_1$ this is obvious. For $P_2$, we have to solve the inequality $n + K > nK + 2$ in order to have an improvement in the number of variables by taking the dual. Using Wolframalpha, the solution of this inequation for n > 1 is $K = \dfrac{n-2}{n-1} < 1$. As K is an integer, the inequation is $K \leq 0$ which does not give any solution as $K > 0$ by definition.
 
 
 \section{Results}
