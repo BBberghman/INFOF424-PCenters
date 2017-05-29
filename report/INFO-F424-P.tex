@@ -219,7 +219,7 @@ This one was not implemented but was still part of the one explored as it is the
 
 \paragraph{Dual problem}
 
-The first idea to diminish the number of variables is to use the dual problem. However given the number of variables and the number of constraints this is not a good idea.
+The first idea to reduce the number of variables is to solve the dual problem. Indeed if a problem has $l$ variables and $m$ constraints, its dual problem has $m$ variables and $l$ constraints. If $l > m$, the dual problem does reduce the number of variables. Let's have a look at the formulations and their number of constraints and variables.
 
 \begin{tabular}{c|c|c}
     Formulation & \# variables & \# constraints \\
@@ -228,7 +228,7 @@ The first idea to diminish the number of variables is to use the dual problem. H
     $P_3$ & $n + K$ & $nK+2$
 \end{tabular}
 
-Considering that $n$ and $K \in \field{N}$, the \#variables $<$ \#constraints. For $P_1$ this is obvious. For $P_2$, we have to solve the inequality $n + K > nK + 2$, which would indicate that taking the dual would reduce the number of variables. Using WolframAlpha, the solution of this inequation for n $>$ 1 is $K = \dfrac{n-2}{n-1} < 1$. As K is an integer, this gives $K \leq 0$ which does not lead to any solution as $K > 0$ by definition. 
+Considering that $n$ and $K \in \field{N}$, the \#variables $<$ \#constraints. For $P_1$ this is obvious. For $P_2$, we have to solve the inequality $n + K > nK + 2$, which would indicate that taking the dual would reduce the number of variables. Using WolframAlpha, the solution of this inequation for n $>$ 1 is $K = \dfrac{n-2}{n-1}$ which is always smaller than 1. As K is an integer, this gives $K \leq 0$ which does not lead to any solution as $K > 0$ by definition. 
 
 \subsection{Valid inequalities}
 
