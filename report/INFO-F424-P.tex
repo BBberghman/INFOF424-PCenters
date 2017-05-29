@@ -73,7 +73,8 @@ code
 	According to the usual canvas, the mathematical formulation is given as follows.
 	\paragraph{Parameters} 
 	\begin{eqnarray*}
-		p &=& \text{maximum number of centers} \\
+		p &=& \text{maximum number of centers;} \\
+		N &=& \text{number of vertices of the instance.} 
 	\end{eqnarray*}
 	\paragraph{Variables} Two variables are used in this formulation:
 	\begin{eqnarray*}
@@ -86,8 +87,7 @@ code
  				0 ~~\text{otherwise}
  			\end{cases} \\
 	\end{eqnarray*}
-	Both indices $i$ and $j$ have a range of $[1, N]$ where $N$ is the number of vertices of the instance. The parameter $p$ 	
-
+	Both indices $i$ and $j$ have a range of $[1, N]$.
 	
 	\paragraph{Objective function}
 	\begin{eqnarray}
@@ -111,10 +111,18 @@ code
 	Constraints (6) and (7) are the binary restrictions for variables $x$ and $y$.     
     
     \subsection{Calik and Tansel (2013)}
-	This is the formulation referred to as (P3) in the original paper.
+	This is the formulation referred to as (P3) in the original paper. This method uses the fact that the distance $d_{ij}$ are the only possible values for $r_p(F)$. It is thus possible to jump from one $d_{ij}$ to another.
 	
 	%define correctly r_p(F)
-	In this formulation, we define the set $ R = \{ \rho_1, \rho_2, ..., \rho_K \}$ with $\rho_1 < \rho_2 < ... < \rho_K$. One of these values determines the value of $r_p(F)$.
+	In this formulation, we define the set $ R = \{ \rho_1, \rho_2, ..., \rho_K \}$ where $\rho_1 < \rho_2 < ... < \rho_K$ is an ordering of the distinct distance values of the matrix of distances $d_{ij}$. One of these values determines the value of $r_p(F)$.
+	
+	\paragraph{Parameters} 
+	\begin{eqnarray*}
+		p &=& \text{maximum number of centers;} \\
+		N &=& \text{number of vertices of the instance;} \\
+		K &=& \text{number of distinct distance values in the instance.}
+	\end{eqnarray*}
+	
 	\paragraph{Variables} Three variables are used in this formulation:
 	\begin{eqnarray*}
 		a_{ijk} &=& \begin{cases}
@@ -129,13 +137,13 @@ code
  				1 ~~\text{if $r_p(F) = \rho_k$} \\
  				0 ~~\text{otherwise}
  			\end{cases} \\
- 		p &=& \text{maximum number of centers}
 	\end{eqnarray*}
-	Both indices $i$ and $j$ have a range of $[1, N]$ where $N$ is the number of vertices of the instance. 
+	Both indices $i$ and $j$ have a range of $[1, N]$.
 	
 	\paragraph{Objective function}
 	\begin{eqnarray}
-		min && \sum_{k \in T} \rho_{k} z_{k}	\end{eqnarray}
+		min && \sum_{k \in T} \rho_{k} z_{k}	
+	\end{eqnarray}
 	The objective function determines the value of $r_p(F)$ as the corresponding value $\rho_k$.
 	
 	\paragraph{Constraints}
@@ -221,12 +229,15 @@ This one was not implemented but was still part of the one explored as it is the
 
 The first idea to reduce the number of variables is to solve the dual problem. Indeed if a problem has $l$ variables and $m$ constraints, its dual problem has $m$ variables and $l$ constraints. If $l > m$, the dual problem does reduce the number of variables. Let's have a look at the formulations and their number of constraints and variables.
 
+\begin{table}[h!]
+\centering
 \begin{tabular}{c|c|c}
     Formulation & \# variables & \# constraints \\
     \hline
     $P_1$ & $n^2 + n + 1$ & $n^2 + 2n + 2$ \\
     $P_3$ & $n + K$ & $nK+2$
 \end{tabular}
+\end{table}
 
 Considering that $n$ and $K \in N$, the \#variables $<$ \#constraints. For $P_1$ this is obvious. For $P_2$, we have to solve the inequality $n + K > nK + 2$, which would indicate that taking the dual would reduce the number of variables. Using WolframAlpha, the solution of this inequation for n $>$ 1 is $K < \dfrac{n-2}{n-1}$ which is always smaller than 1. As K is an integer, this gives $K \leq 0$ which does not lead to any solution as $K > 0$ by definition. 
 
@@ -243,7 +254,7 @@ This inequation is used in constraint (\ref{eq:2}) of $P_1$ with a factor called
  
 	\begin{eqnarray}
 	 \sum_{j \in N} \left \lfloor{d_{ij}/divisor}\right \rfloor x_{ij} &\leq& z/divisor \label{eq:2_VI}
-	\end{eqnarray}a,
+	\end{eqnarray}
 	
 The divisor parameter has been optimized blablabla.
 
