@@ -13,6 +13,6 @@ function bestHeuristicRandom(instance::PCInstance)
     println(maximum(obj));
     bestZ = minimum(obj);
     println(bestZ)
-    bestSol = solution[find(bestZ)];
+    bestSol = solution[:,find(bestZ)];
     return bestSol
 end
