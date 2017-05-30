@@ -9,7 +9,7 @@ include("helpers/print.jl")
 include("helpers/random.jl")
 include("helpers/2approx.jl")
 
-function P1(argInstance, argSolver, argVerbose, argOutput, argDivisor)
+function P1(argInstance, argSolver, argVerbose, argDivisor)
 
   # Instance
   instance = read_instance(argInstance)

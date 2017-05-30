@@ -6,7 +6,7 @@ include("helpers/PCInstance.jl")
 include("helpers/read_instance.jl")
 include("helpers/print.jl")
 
-function P3(argInstance, argSolver, argVerbose, argOutput)
+function P3(argInstance, argSolver, argVerbose, argDivisor)
 
   # Instance
   instance = read_instance(argInstance)
@@ -15,12 +15,8 @@ function P3(argInstance, argSolver, argVerbose, argOutput)
   if argSolver == "CbcBase" || argSolver == "ModCbc"
     m = Model(solver = CbcSolver())
   elseif argSolver == "Gurobi"
-    m = Model(solver = GurobiSolver())
+    m = Model(solver = GurobiSolver(OutputFlag=argVerbose))
   end
-  instance = read_instance("instances/1.out")
-
-  # Model
-  m = Model(solver = GurobiSolver())
 
   # Variables
   @variable(m, y[1:instance.n], Bin) # (18)
@@ -46,9 +42,15 @@ function P3(argInstance, argSolver, argVerbose, argOutput)
   @constraint(m, sum(z[k] for k = 1:instance.K) == 1) # (17)
 
   # Resolution
+  tic();
   status = solve(m)
-  println("Objective value: ", getobjectivevalue(m))
+  score =  getobjectivevalue(m)
+  execution_time = toq();
+  if argVerbose > 1
+    println("Objective value: ", score)
+    y2 = getvalue(y)
+    print_solution(instance, y2)
+  end
 
-  y2 = getvalue(y)
-  print_solution(instance, y2)
+  return Result(score, execution_time)
 end

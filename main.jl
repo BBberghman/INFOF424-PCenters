@@ -53,12 +53,16 @@ function main()
         parsed_args["input"],
         parsed_args["solver"],
         parse(Int16, parsed_args["verbose"]),
-        "a",
         parse(Int16, parsed_args["divisor"])
-    )
+      )
     elseif parsed_args["formulation"] == "P3"
       include("P3.jl")
-      result = P3(parsed_args["input"], parsed_args["solver"], "a", "a")
+      result = P3(
+        parsed_args["input"],
+        parsed_args["solver"],
+        parse(Int16, parsed_args["verbose"]),
+        parse(Int16, parsed_args["divisor"])
+      )
     else
       println("Formulation unkown. Use P1 or P3")
       exit(0)
