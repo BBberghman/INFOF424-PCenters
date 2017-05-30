@@ -1,6 +1,5 @@
 using ArgParse
 
-
 #your program should implement unix like options reading, for instance
 #  -h [or --help] for help display,
 #  -i [or --input] for file input, ...),
@@ -14,17 +13,19 @@ function parse_commandline()
     @add_arg_table s begin
         "--input", "--instance", "-i"
             help = "Path to the instance file"
-        "--output", "-o"
-            help = "Output file if not stdout"
-            default = "stdout"
+            required = true
+        "--formulation", "-f"
+            help = "P1 or P3"
+            required = true
         "--solver", "-s"
-            help = "Solver method:\nCbcBase: Base Cbc without any optimization (careful, this might last long)\nModCbc: Cbc with some optmizations\nGurobi: Fast, standard solver which implements optimizations on its own"
+            help = "BaseCbc, ModCbc, Gurobi"
+            required = true
+        "--output", "-o"
+            help = "Output file path if not using stdout"
+            default = "stdout"
         "--verbose", "-v"
             help = "Enable verbose mode"
             action = :store_true
-        "arg1"
-            help = "a positional argument"
-            required = true
     end
 
     return parse_args(s)
@@ -36,6 +37,10 @@ function main()
     for (arg,val) in parsed_args
         println("  $arg  =>  $val")
     end
+
+    include("P1.jl")
+    P1(parsed_args["input"], parsed_args["solver"], "a", "a")
+
 end
 
 main()
