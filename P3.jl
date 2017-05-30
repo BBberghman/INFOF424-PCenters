@@ -48,7 +48,7 @@ function P3(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
 
     rhoK = obj_value(initial_candidate, instance)       #value of rhoK corresponding to the initial solution
     #gives the value of the subscript K
-    init_z = zeros(Bin, instance.K);
+    init_z = zeros(Bool, instance.K);
     for k = 1:instance.K
         if (rhoK == instance.rho[k])
             init_z[k] = 1;

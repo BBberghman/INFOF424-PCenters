@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Run gurobi with P1 on all instances
+# Run gurobi with P1 on all instances with random initial candidate
 
 for i in {1..10}
 do

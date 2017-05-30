@@ -15,6 +15,9 @@ instances/4.out	Cbc	P1	default	100	74	14.306546184
 instances/5.out	Cbc	P1	default	100	48	6.330948012
 instances/6.out	Cbc	P1	default	100	84	869.241500547
 instances/7.out	Cbc	P1	default	100	64	359.018455435
+instances/8.out	Cbc	P1	default	100	55	404.131246608
+instances/9.out	Cbc	P1	default	100	37	62.033319736
+instances/10.out	Cbc	P1	default	100	20	27.784945867
 instances/1.out	Cbc	P1	random	-1	127	94.15505467
 instances/2.out	Cbc	P1	random	-1	98	15.674085595
 instances/3.out	Cbc	P1	random	-1	93	17.57113258
@@ -22,3 +25,13 @@ instances/4.out	Cbc	P1	random	-1	74	5.226062244
 instances/5.out	Cbc	P1	random	-1	48	5.527377847
 instances/6.out	Cbc	P1	random	-1	84	303.530661186
 instances/7.out	Cbc	P1	random	-1	64	171.050258049
+instances/8.out	Cbc	P1	random	-1	55	190.736763717
+instances/9.out	Cbc	P1	random	-1	37	56.50283198
+instances/10.out	Cbc	P1	random	-1	20	25.712002064
+instances/1.out	Cbc	P1	2approx	-1	127	52.371697136
+instances/2.out	Cbc	P1	2approx	-1	98	22.989536846
+instances/3.out	Cbc	P1	2approx	-1	93	34.206825183
+instances/4.out	Cbc	P1	2approx	-1	74	5.880820739
+instances/5.out	Cbc	P1	2approx	-1	48	5.425965468
+instances/6.out	Cbc	P1	2approx	-1	84	376.199526108
+instances/7.out	Cbc	P1	2approx	-1	64	130.071632819
