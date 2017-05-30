@@ -1,7 +1,8 @@
 #Select the best solution out of 1000 random solutions
 function bestHeuristicRandom(instance::PCInstance)
     nb = 1000;
-    solution = Array(UInt8,instance.n,nb)#Array{Array{UInt8}}(nb)
+
+    solution = Array(UInt8,instance.n,nb)
     obj = zeros(UInt16,nb)
 
     for i = 1:nb
