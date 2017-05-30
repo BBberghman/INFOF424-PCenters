@@ -35,3 +35,6 @@ instances/4.out	Cbc	P1	2approx	-1	74	5.880820739
 instances/5.out	Cbc	P1	2approx	-1	48	5.425965468
 instances/6.out	Cbc	P1	2approx	-1	84	376.199526108
 instances/7.out	Cbc	P1	2approx	-1	64	130.071632819
+instances/8.out	Cbc	P1	2approx	-1	55	396.217578709
+instances/9.out	Cbc	P1	2approx	-1	37	75.553349293
+instances/10.out	Cbc	P1	2approx	-1	20	26.317699329

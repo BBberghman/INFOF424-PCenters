@@ -375,7 +375,6 @@ First, let us show the optimal values we found for each instance:
 We had the same results with both formulations.
 
 %Instance // Objective function // Example of solutions  // computational time (mean) //
-
 \section{Conclusion}
 	\subsection{Comparison of the two formulations}
 	
@@ -387,16 +386,23 @@ Note how we had to use a logarithmic scale for the vertical axis to keep the vis
 
 We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search.
 
-The same plot is shown for P3:
-\input{time-all-instances-p3}
-Note that some values aren't present because they would simply require too much computational time. Any computation with Cbc on P3 without any optimization would many hours to finish, so they are not plotted here (they wouldn't compete with the others anyway). Remark that being able to get optimal solutions in a timely manner thanks to our implementations of heuristics is a success.
-
-
 
     Note how we had to use a logarithmic scale for the vertical axis to keep the visualisation relevant. Indeed, Cbc could reach very long times compared to Gurobi.
 
     We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search. as it means that more points have to be associated to less centers: the number of points per center increases and so does the optimal $\rho_K$.
 	
+	
+\pagebreak
+
+The same plot is shown for P3 in Figure 4.
+\input{time-all-instances-p3}
+
+Some values aren't present because they would simply require too much computational time. Any computation with Cbc on P3 without any optimization would take many hours to finish (6 hours for \texttt{1.out}), so they are not plotted here (they wouldn't compete with the others anyway). The same goes for Cbc on P3 with the additional VI as described before, and also for the farthest-first heuristic which also leads to hours of computation in this setup. Remark that being able to get some optimal solutions in a timely manner thanks to our implementations of heuristics is already a success.
+
+To conclude on a high-level note, as long as we consider Gurobi, the change isn't so important: P3 is just a bit slower than P1. But for our implementations, the change is drastic: most of the time we aren't able to get optimal solutions in a decent computational time. This is likely to be thanks to the multiple optimizations implemented in Gurobi which make it more resistant to various formulations.
+
+
+
 	\subsection{Wrap-up}
 	This project gave us interesting insight on how to practically use solvers  and  in a way, how they worked internally. Comparing our own implementations with Gurobi was a challenging and exciting task as we could see our improvements make the execution times required to solve instances decrease and decrease over time.
 	
