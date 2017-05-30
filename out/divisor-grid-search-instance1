@@ -19,3 +19,50 @@ elapsed time: 117.793334955 seconds
 y = 1, index: 7
 y = 1, index: 78
 y = 1, index: 94
+
+
+N: 100
+p: 5
+K: 284
+divisor: 70
+Objective value: 127.0
+elapsed time: 59.834968242 seconds
+y = 1, index: 7
+y = 1, index: 25
+y = 1, index: 63
+y = 1, index: 78
+
+N: 100
+p: 5
+K: 284
+divisor: 65
+Objective value: 127.0
+elapsed time: 102.294406505 seconds
+y = 1, index: 7
+y = 1, index: 13
+y = 1, index: 78
+y = 1, index: 94
+y = 1, index: 99
+
+N: 100
+p: 5
+K: 284
+divisor: 60
+Objective value: 127.0
+elapsed time: 64.396503312 seconds
+y = 1, index: 60
+y = 1, index: 66
+y = 1, index: 78
+y = 1, index: 85
+y = 1, index: 99
+
+N: 100
+p: 5
+K: 284
+divisor: 40
+Objective value: 127.0
+elapsed time: 235.789813385 seconds
+y = 1, index: 7
+y = 1, index: 13
+y = 1, index: 25
+y = 1, index: 78

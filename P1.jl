@@ -23,7 +23,7 @@ m = Model(solver = CbcSolver())
 # Objective
 @objective(m, Min, z)  # (1)
 
-divisor = 80
+divisor = 140
 println("divisor: ", divisor)
 
 # Constraints
