@@ -1,7 +1,7 @@
 #Select the best solution out of 10 solutions found by the 2-approx heuristic and 1000 random solutions
 function bestHeuristicMix(instance::PCInstance)
-    nb1 = 10;
-    nb2 = 1000;
+    nb1 = 500;
+    nb2 = 500;
     nb = nb1 + nb2;
 
     solution = Array{Array{UInt8}}(nb)
