@@ -23,13 +23,12 @@ function P3(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
     println(string(
       "Execution:\n",
       "- Solver:\t", argSolver, "\n",
-      "- Initial candidate:\t", argInitialCandidate, "\n",
-      "- Divisor:\t", argDivisor, "\n"
+      "- Initial candidate:\t", argInitialCandidate, "\n"
     ))
   end
 
   # Model
-  if argSolver == "CbcBase" || argSolver == "ModCbc"
+  if argSolver == "Cbc"
     m = Model(solver = CbcSolver())
   elseif argSolver == "Gurobi"
     m = Model(solver = GurobiSolver(OutputFlag=argVerbose))
@@ -38,7 +37,7 @@ function P3(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
   # Variables
   @variable(m, y[1:instance.n], Bin) # (18)
   @variable(m, z[1:instance.K], Bin) # (19)
-  
+
   # Initial candidate
   if argInitialCandidate != "default"
     if argInitialCandidate == "random"
@@ -46,16 +45,16 @@ function P3(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
     elseif argInitialCandidate == "2approx"
       initial_candidate = bestHeuristicTwoApprox(instance)
     end
-    
+
     rhoK = obj_value(initial_candidate, instance)       #value of rhoK corresponding to the initial solution
     #gives the value of the subscript K
     init_z = zeros(Bin, instance.K);
-    for k = 1:instance.K 
+    for k = 1:instance.K
         if (rhoK == instance.rho[k])
             init_z[k] = 1;
         end;
     end;
-            
+
     setvalue(z, init_z)
     setvalue(y, initial_candidate)
   end
