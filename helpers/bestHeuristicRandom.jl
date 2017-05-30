@@ -10,9 +10,13 @@ function bestHeuristicRandom(instance::PCInstance)
         obj[i] = obj_value(solution[:,i], instance);
     end;
 
-    #println(maximum(obj));
     bestZ = minimum(obj);
-    #println(bestZ)
-    bestSol = solution[:,find(bestZ)];
+    bestSol = zeros(UInt8,instance.n)
+    for i = 1:nb 
+        if obj[i] == bestZ 
+            bestSol = solution[:,i]
+            break;
+        end;
+    end;
     return bestSol
 end
