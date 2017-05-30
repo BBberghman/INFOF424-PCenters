@@ -30,5 +30,6 @@ Where :
 
 ## References
 
-[1] Calik H, Tansel BC (2013) Double bound method for solving the p-center location problem. Comput Oper
-Res 40:2991–2999
+[1] Calik H, Tansel BC (2013) Double bound method for solving the p-center location problem. Computers & Operations Research 40 pp.2991–2999
+[2] Daskin Mark S. (1995) Network and discrete location: models, algorithms, and applications, Wiley Interscience, New York
+[3] Wolsey Laurence A. (1998) Integer Programming. Wiley Interscience, New York
