@@ -8,8 +8,6 @@
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{listings}
-\usepackage[backend=biber]{biblatex}
-\bibliography{bibliography.bib}
 \usetikzlibrary{positioning}
 
 %To be able to "escape" listings, example bold.
@@ -412,10 +410,12 @@ To conclude on a high-level note, as long as we consider Gurobi, the change isn'
 	\subsection{Wrap-up}
 	This project gave us interesting insight on how to practically use solvers  and  in a way, how they worked internally. Comparing our own implementations with Gurobi was a challenging and exciting task as we could see our improvements make the execution times required to solve instances decrease and decrease over time.
 	
-\section{References}
+
+\bibliographystyle{plain}
 
 \nocite{*}
-% This prints the bibliography on the slide
-\printbibliography
+\bibliography{bibliography} %si on utilise bibtex (il y a beaucoup plus de possibilités qu'indiquées dans ce fichier)
+%on peut bien sûr gérer la bibliographie soi-même
+%on peut aussi prévoir une webographie séparée
 
 \end{document}
