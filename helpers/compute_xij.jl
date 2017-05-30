@@ -8,6 +8,7 @@ function compute_xij(solution::Array{UInt8}, instance::PCInstance)
     for i = 1:instance.n
         A = solution .* instance.d[i,:];        #keep j = centers
         xij_centers = A[find(A)];           
+        dic_min = minimum(xij_centers);      #smallest distance between the point and all the centers
         for j = 1:instance.n
             if (dic_min == instance.d[i,j] && solution[j] == 1) # for that distance the point is associated to that center
                 x[i,j] = 1;
