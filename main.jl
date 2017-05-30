@@ -32,24 +32,33 @@ function parse_commandline()
 end
 
 function main()
+    # Parse arguments
     parsed_args = parse_commandline()
     println("Parsed args:")
     for (arg,val) in parsed_args
         println("  $arg  =>  $val")
     end
 
+    # Instance file is checked later on, in helpers/read_instance.jl
+
+    # Solver
     if parsed_args["solver"] != "BaseCbc" && parsed_args["solver"] != "ModCbc" && parsed_args["solver"] != "Gurobi"
       println("Solver unkown. Use BaseCbc, ModCbc or Gurobi.")
       exit(0)
     end
 
+    # Formualtion
     if parsed_args["formulation"] == "P1"
       include("P1.jl")
       P1(parsed_args["input"], parsed_args["solver"], "a", "a")
     elseif parsed_args["formulation"] == "P3"
       include("P3.jl")
       P3(parsed_args["input"], parsed_args["solver"], "a", "a")
+    else
+      println("Formulation unkown. Use P1 or P3")
+      exit(0)
     end
+
 
 end
 
