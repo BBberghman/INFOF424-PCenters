@@ -6,11 +6,24 @@ include("helpers/PCInstance.jl")
 include("helpers/Result.jl")
 include("helpers/read_instance.jl")
 include("helpers/print.jl")
+include("helpers/random.jl")
+include("helpers/2approx.jl")
 
 function P3(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
 
   # Instance
   instance = read_instance(argInstance)
+
+  # Verbose
+  if argVerbose >= 1
+    print(describe_instance(instance))
+    println(string(
+      "Execution:\n",
+      "- Solver:\t", argSolver, "\n",
+      "- Initial candidate:\t", argInitialCandidate, "\n",
+      "- Divisor:\t", argDivisor, "\n"
+    ))
+  end
 
   # Model
   if argSolver == "CbcBase" || argSolver == "ModCbc"
@@ -26,7 +39,7 @@ function P3(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
   # Objective
   @objective(m, Min, sum(instance.rho[k] * z[k] for k = 1:instance.K))  # (14)
 
-  #Parameter a
+  # Parameter a
   a = zeros(instance.n, instance.n, instance.K)
 
   # Constraints
