@@ -204,7 +204,7 @@ optional arguments:
     \item[-] \texttt{P3.jl} : Formulation $P_3$
     \item[-] \texttt{run\_all\_gurobi\_P1.sh} : Run all instances with formulation $P_1$ with Gurobi as solver 
     \item[-] \texttt{run\_all\_gurobi\_P3.sh} : Run all instances with formulation $P_3$ with Gurobi as solver 
-        \item[-] \texttt{chvatal-gomory-divisor-search.sh} and \texttt{chvatal-gomor-divisor-search-2.sh} : Bash loops implementing a grid search to try and find the best divisor value (divisor is explained later on).
+    \item[-] \texttt{chvatal-gomory-divisor-search.sh} and \texttt{chvatal-gomor-divisor-search-2.sh} : Bash loops implementing a grid search to try and find the best divisor value (divisor is explained later on).
     \item[-] \texttt{README.md} : Read me containing primary informations on the project and how to compile
     \item[-] \texttt{instances/} : All the instances to test
     \item[-] \texttt{out/} : Example outputs of some executions
@@ -214,45 +214,35 @@ optional arguments:
     
 \subsection{Helper functions} 
 
-\paragraph{PCInstance.jl} Type PCInstance, contains 5 attributes: n, p, d, K, rho.
+\begin{itemize}
+\item[-] \texttt{PCInstance.jl} : Type PCInstance, contains 5 attributes: n, p, d, K, rho.
+\item[-] \texttt{read\_instance.jl} : Parse an instance (given in path) and returns a PCInstance (Input: path, Output: instance::PCInstance)
 
-\paragraph{read\_instance.jl} Input: path, Output: instance::PCInstance
+\item[-] \texttt{Result.jl} : Type Result, contains 2 attributes: score, time.
 
-Parse an instance (given in path) and returns a PCInstance
+\item[-] \texttt{compute\_xij.jl} : Compute the x_ij based on a solution. (Input: solution::Array{UInt8}, instance::PCInstance, Output: solution::Array{UInt8,n,n})
 
-\paragraph{Result.jl}  Type Result, contains 2 attributes: score, time.
+\item[-] \texttt{obj\_value.jl} : Compute the objective value given a solution, i.e. the minimal distance such that each point is in a distance smaller or equal to that from one of the center. (Input: solution::Array{UInt8}, instance::PCInstance, Output: solution::UInt16)
 
-\paragraph{twoapprox\_heuristic.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
+\item[-] \texttt{twoapprox\_heuristic.jl} : Function returning the 2-approximation heuristic of an instance (Input: instance::PCInstance, Output: solution::Array{UInt8,n})
 
-Function returning the 2-approximation heuristic of an instance
+\item[-] \texttt{random\_heuristic.jl} : Function returning a random solution of an instance (Input: instance::PCInstance, Output: solution::Array{UInt8,n})
 
-\paragraph{random\_heuristic.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
+\item[-] \texttt{bestHeuristicRandom.jl} : Returns the best solution out of 1000 random solutions (Input: instance::PCInstance, Output: solution::Array{UInt8,n})
 
-Function returning a random solution of an instance
+\item[-] \texttt{bestHeuristicTwoApprox.jl} : Select the best solution out of 10 solutions found by the 2-approx heuristic (Input: instance::PCInstance, Output: solution::Array{UInt8,n})
 
-\paragraph{bestHeuristicRandom.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
+\item[-] \texttt{bestHeuristicMix.jl} : Select the best solution out of 10 solutions found by the 2-approximation heuristic and 1000 random solutions. (Input: instance::PCInstance, Output: solution::Array{UInt8,n})
 
-Returns the best solution out of 1000 random solutions
+\item[-] \texttt{print\_solution.jl} : Print the position of the centers. (Input: instance::PCInstance, solution::Array{UInt8,n})
 
-\paragraph{bestHeuristicTwoApprox.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
+\item[-] \texttt{avg-divisor-search.py} :Python file to realize the grid search on the parameter ``divisor``
 
-Select the best solution out of 10 solutions found by the 2-approx heuristic
-
-\paragraph{bestHeuristicMix.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
-
-Select the best solution out of 10 solutions found by the 2-approximation heuristic and 1000 random solutions.
-
-\paragraph{print\_solution.jl} Input: instance::PCInstance, solution::Array{UInt8,n}
-
-Print the position of the centers.
-
-\paragraph{avg-divisor-search.py}
-
-Python file to realize the grid search on the parameter ``divisor``
+\end{itemize}
 
 \section{Optimization}
 \subsection{Hot starts}
-Three hot starts have been tested: a random initialization, the 2-approximation algorithms and the default initialization implemented in the Gurobi Optimizer or Cbc, depending on which is used in the current execution.
+Three hot starts have been tested: a random initialization, the 2-approximation algorithm and the default initialization implemented in the Gurobi Optimizer or Cbc, depending on which is used in the current execution.
 
 \subsubsection{Random initialization}
 
@@ -294,14 +284,14 @@ The procedure is described in the pseudo-code here after. The first center is ch
 (*\bfseries end 2-approximation*)
 \end{lstlisting}
 
-In this case, it is not clear whether the distance metric considered has the triangular inequality property, this is why no assumptions on the optimally of this solution can be done. The name farthest-first traversal will thus be preferred. 
+In this case, it is not clear whether the distance metric considered has the triangular inequality property, this is why no assumptions on the optimally of this solution can be done. The name farthest-first traversal should thus be preferred. 
 
 % https://pdfs.semanticscholar.org/f276/c00bac7594107c291947f560b7b48b1439d7.pdf
 % https://cseweb.ucsd.edu/classes/sp11/cse202-a/lecture4-final.pdf
 % http://algo2.iti.kit.edu/vanstee/courses/kcenter.pdf
 
-\subsubsection{Gurobi Optimizer}
-This one was not implemented but was still part of the one explored as it is the default one when using the Gurobi Optimizer and it yields good results.
+\subsubsection{Default initialization}
+This one was not implemented but was still part of the one explored as it is the default one when using an Optimizer and it yields good results, specially in the case of Gurobi.
 
 \subsubsection{Comparison of the heuristics}
 
@@ -390,12 +380,11 @@ We had the same results with both formulations.
 	\subsection{Comparison of the two formulations}
 	Next, let us see the execution time required for all instances:
 	
-\input{time-all-instances}
+    \input{time-all-instances}
 
-Note how we had to use a logarithmic scale for the vertical axis to keep the visualisation relevant. Indeed, Cbc could reach very long times compared to Gurobi.
+    Note how we had to use a logarithmic scale for the vertical axis to keep the visualisation relevant. Indeed, Cbc could reach very long times compared to Gurobi.
 
-We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search.
-
+    We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search. as it means that more points have to be associated to less centers: the number of points per center increases and so does the optimal $\rho_K$.
 	
 	\subsection{Wrap-up}
 	This project gave us interesting insight on how to practically use solvers  and  in a way, how they worked internally. Comparing our own implementations with Gurobi was a challenging and exciting task as we could see our improvements make the execution times required to solve instances decrease and decrease over time.
