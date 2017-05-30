@@ -26,7 +26,7 @@
 Erica \textsc{Berghman} \\
 Charles \textsc{Hamesse} \\
 ~\\
-École Polytechnique de Bruxelles\\
+École polytechnique de Bruxelles\\
 \vspace{6ex}May 2017\vspace{4ex}}
 \begin{document}
 
@@ -164,7 +164,60 @@ code
 %%%
 %%%
 
-\section{Implementation}
+
+\section{Developer documentation}
+\begin{itemize}
+    \item[-] ``main.jl`` 
+    \item[-] ``P1.jl`` : Formulation $P_1$
+    \item[-] ``P3.jl`` : Formulation $P_3$
+    \item[-] ``run\_all\_gurobi\_P1.sh`` : run all instances with formulation $P_1$ with Gurobi as solver 
+    \item[-] ``run\_all\_gurobi\_P3.sh`` : run all instances with formulation $P_3$ with Gurobi as solver 
+        \item[-] ``chvatal-gomory-divisor-search.sh`` :  
+    \item[-] ``chvatal-gomor-divisor-search-2.sh`` : 
+    \item[-] ``README.md`` : Read me containing primary informations on the project and how to compile
+    \item[-] ``instances/`` : all the instances to test
+    \item[-] ``out/`` : outputs
+    \item[-] ``report/`` : report (in \LaTeX \; and in PDF)
+    \item[-] ``resources/`` : paper and project formulation
+    \end{itemize}
+    
+\subsection{Helper functions} 
+
+\paragraph{PCInstance.jl} Type PCInstance, contains 5 attributes: n, p, d, K, rho.
+
+\paragraph{read\_instance.jl} Input: path, Output: instance::PCInstance
+
+Parse an instance (given in path) and returns a PCInstance
+
+\paragraph{Result.jl}  Type Result, contains 2 attributes: score, time.
+
+\paragraph{twoapprox\_heuristic.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
+
+Function returning the 2-approximation heuristic of an instance
+
+\paragraph{random\_heuristic.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
+
+Function returning a random solution of an instance
+
+\paragraph{bestHeuristicRandom.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
+
+Returns the best solution out of 1000 random solutions
+
+\paragraph{bestHeuristicTwoApprox.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
+
+Select the best solution out of 10 solutions found by the 2-approx heuristic
+
+\paragraph{bestHeuristicMix.jl} Input: instance::PCInstance, Output: solution::Array{UInt8,n}
+
+Select the best solution out of 10 solutions found by the 2-approximation heuristic and 1000 random solutions.
+
+\paragraph{print\_solution.jl} Input: instance::PCInstance, solution::Array{UInt8,n}
+
+Print the position of the centers.
+
+\paragraph{avg-divisor-search.py}
+
+Python file to realize the grid search on the parameter ``divisor``
 
 \section{Optimization}
 \subsection{Hot starts}

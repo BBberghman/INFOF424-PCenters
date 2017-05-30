@@ -5,9 +5,9 @@ using Gurobi
 include("helpers/PCInstance.jl")
 include("helpers/Result.jl")
 include("helpers/read_instance.jl")
-include("helpers/print.jl")
-include("helpers/random.jl")
-include("helpers/2approx.jl")
+include("helpers/print_solution.jl")
+include("helpers/random_heuristic.jl")
+include("helpers/twoapprox_heuristic.jl")
 
 function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
 
