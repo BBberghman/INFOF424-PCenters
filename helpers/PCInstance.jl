@@ -5,3 +5,10 @@ type PCInstance
   K::UInt16
   rho::Array{UInt16}
 end
+
+function describe_instance(instance)
+  return string("PCInstance:\n",
+    "- N:\t", instance.n, "\n",
+    "- p:\t", instance.p, "\n"
+  )
+end

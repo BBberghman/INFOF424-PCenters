@@ -3,10 +3,11 @@ using Gurobi
 using Cbc
 
 include("helpers/PCInstance.jl")
+include("helpers/Result.jl")
 include("helpers/read_instance.jl")
 include("helpers/print.jl")
 
-function P3(argInstance, argSolver, argVerbose, argDivisor)
+function P3(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
 
   # Instance
   instance = read_instance(argInstance)
@@ -46,7 +47,7 @@ function P3(argInstance, argSolver, argVerbose, argDivisor)
   status = solve(m)
   score =  getobjectivevalue(m)
   execution_time = toq();
-  if argVerbose > 1
+  if argVerbose >= 1
     println("Objective value: ", score)
     y2 = getvalue(y)
     print_solution(instance, y2)
