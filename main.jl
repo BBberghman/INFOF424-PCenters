@@ -23,9 +23,12 @@ function parse_commandline()
         "--output", "-o"
             help = "Output file path if not using stdout"
             default = "stdout"
+        "--divisor", "-d"
+            help = "Divisor for valid inequality in P1. If set to -1, the new valid inequality is not considered."
+            default = "-1"
         "--verbose", "-v"
-            help = "Enable verbose mode"
-            action = :store_true
+            help = "Enable verbose mode 0, 1 or 2."
+            default = "0"
     end
 
     return parse_args(s)
@@ -34,10 +37,6 @@ end
 function main()
     # Parse arguments
     parsed_args = parse_commandline()
-    println("Parsed args:")
-    for (arg,val) in parsed_args
-        println("  $arg  =>  $val")
-    end
 
     # Instance file is checked later on, in helpers/read_instance.jl
 
@@ -47,17 +46,45 @@ function main()
       exit(0)
     end
 
-    # Formualtion
+    # Formulation
     if parsed_args["formulation"] == "P1"
       include("P1.jl")
-      P1(parsed_args["input"], parsed_args["solver"], "a", "a")
+      result = P1(
+        parsed_args["input"],
+        parsed_args["solver"],
+        parse(Int16, parsed_args["verbose"]),
+        "a",
+        parse(Int16, parsed_args["divisor"])
+    )
     elseif parsed_args["formulation"] == "P3"
       include("P3.jl")
-      P3(parsed_args["input"], parsed_args["solver"], "a", "a")
+      result = P3(parsed_args["input"], parsed_args["solver"], "a", "a")
     else
       println("Formulation unkown. Use P1 or P3")
       exit(0)
     end
+
+    # Output
+    str = string(
+      parsed_args["input"], "\t",
+      parsed_args["solver"], "\t",
+      parsed_args["formulation"], "\t",
+      parsed_args["divisor"], "\t",
+      result.score, "\t",
+      result.time, "\n"
+    )
+    if !isempty(parsed_args["output"])
+      try
+        open(parsed_args["output"], "a") do f
+          write(f, str)
+        end
+      catch
+        println("Output file invalid")
+      end
+    end
+
+    println(str)
+
 
 
 end
