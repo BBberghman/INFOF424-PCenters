@@ -4,8 +4,8 @@ The grading should respect the following scheme (the grading scale is indicative
 
 1. 13 points can be obtained on the correct solving of the benchmark instances
 
-2. 3 points can be taken by offering a decent Human Machine Interface. Note that it does not mean that I want a fancy/shiny Graphical Interface. It means, that your program should implement unix like options reading (for instance -h [or --help] for help display, -i [or --input] for file input, ...), stdin reading and stdout writing, different level of verbosity, ...
-Note however that the program has to be usable in a bash loop/script. Otherwise, a penalty of 3 points will be applied.
+2. 3 points can be taken by offering a decent Human Machine Interface. It means, that your program should implement unix like options reading (for instance -h [or --help] for help display, -i [or --input] for file input, ...), stdin reading and stdout writing, different level of verbosity, ...
+Note however that the program has to be usable in a bash loop/script.
 
 3. 4 points on the optimization of your model. In other words, the faster your model runs, the better it is. This can be done in a lot of ways:
 

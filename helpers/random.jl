@@ -1,6 +1,6 @@
 # Create a random solution containing p centers
 function random_heuristic(p::UInt8, n::UInt8)
-    solution = fill(0,n);
+    solution = zeros(Int16,instance.n)
 
     for i = 1:p                     # p centers
         idx = rand(1:n);            # randomly chosen between 1 and n

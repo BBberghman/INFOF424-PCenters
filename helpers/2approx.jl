@@ -45,7 +45,7 @@ function make2approx(instance)
   end
 
   # write solution
-  solution = fill(0, instance.n);
+  solution = zeros(UInt8,instance.n);
 
   for i = centers
       solution[i] = 1;
