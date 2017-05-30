@@ -1,4 +1,4 @@
 type Result
-  score::UInt64
+  score::UInt16
   time::Float64
 end
