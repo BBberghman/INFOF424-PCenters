@@ -5,7 +5,7 @@ end
 function make2approx(instance)
 
   # init center list
-  centers = zeros(Int64,instance.p)
+  centers = zeros(Int16,instance.p)
 
   # pick a first center randomly
   centers[1] = rand(1:instance.n)
@@ -13,14 +13,14 @@ function make2approx(instance)
   # loop for all remaining centers to find
   nleft = instance.p - 1
   while nleft > 0
-    outer_max = typemin(Int64)
+    outer_max = typemin(Int16)
     outer_max_idx = -1
 
     # for all rows (vertices)
     for i = 1:instance.n
       if !in(i, centers)
         # get the min distance from all assigned centers
-        inner_min = typemax(Int64) # integer max value
+        inner_min = typemax(Int16) # integer max value
         for j = centers
           if j > 0
             if instance.d[i,j] < inner_min
