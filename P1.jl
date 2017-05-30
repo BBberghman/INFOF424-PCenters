@@ -48,10 +48,6 @@ function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
     elseif argInitialCandidate == "2approx"
       initial_candidate = bestHeuristicTwoApprox(instance)
     end
-    if argVerbose >= 1
-      println("Initial solution")
-      println(initial_candidate)
-    end
     setvalue(y, initial_candidate)
   end
 
