@@ -25,12 +25,12 @@ function read_instance(path)
     for i = 1:K
   	   rho[i] = parse(Int64, lines[i+n+offset+5])
     end
+    
+    close(file)
 
     return PCInstance(n,p,d,K,rho)
   catch
     println("Instance file not valid")
     exit(0)
-  finally
-    close(file)
   end
 end

@@ -39,4 +39,4 @@ status = solve(m)
 println("Objective value: ", getobjectivevalue(m))
 
 y2 = getvalue(y)
-print_solution(y2)
+print_solution(instance, y2)

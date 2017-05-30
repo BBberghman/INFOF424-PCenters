@@ -56,5 +56,5 @@ function P1(argInstance, argSolver, argVerbose, argOutput)
   toc();
 
   y2 = getvalue(y)
-  print_solution(y2)
+  print_solution(instance, y2)
 end
