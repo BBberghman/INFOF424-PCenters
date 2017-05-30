@@ -5,9 +5,12 @@ using Gurobi
 include("helpers/PCInstance.jl")
 include("helpers/Result.jl")
 include("helpers/read_instance.jl")
-include("helpers/print.jl")
-include("helpers/random.jl")
 include("helpers/2approx.jl")
+include("helpers/random.jl")
+include("helpers/print.jl")
+include("helpers/bestHeuristicRandom.jl")
+include("helpers/bestHeuristicTwoApprox.jl")
+include("helpers/obj_value.jl")
 
 function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
 
@@ -41,9 +44,13 @@ function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
   # Initial candidate
   if argInitialCandidate != "default"
     if argInitialCandidate == "random"
-      initial_candidate = random_heuristic(instance)
+      initial_candidate = bestHeuristicRandom(instance)
     elseif argInitialCandidate == "2approx"
-      initial_candidate = twoapprox_heuristic(instance)
+      initial_candidate = bestHeuristicTwoApprox(instance)
+    end
+    if argVerbose >= 1
+      println("Initial solution")
+      println(initial_candidate)
     end
     setvalue(y, initial_candidate)
   end

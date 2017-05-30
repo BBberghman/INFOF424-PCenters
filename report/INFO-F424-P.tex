@@ -55,13 +55,42 @@ Charles \textsc{Hamesse} \\
 \subsection{Implementation}
 
 \subsection{Compiling and running}
- 
-\paragraph{Compiling}
+As Julia is a scripting language, nothing needs to be compiled. However, one might have to install the following packages to ensure the correction functioning of our program:
+\begin{itemize}
+	\item \texttt{ArgParse}: used to parse command-line arguments
+	\item \texttt{Cbc}: a simple LP solver
+	\item \texttt{Gurobi}: a more complex, commercial LP solver
+\end{itemize}
 
-\paragraph{Running}
-Some example runs:
+To launch the program or use it in a bash script, one only needs to \texttt{cd} to the root directory of our archive and enter:
+
 \begin{lstlisting}
-code
+julia main.jl
+\end{lstlisting}
+
+We implemented a simple yet complete human-machine interface which is well described using \texttt{-h} or \texttt{--help}:
+\begin{lstlisting}
+>>> julia main.jl -h
+usage: main.jl -i INPUT -f FORMULATION -s SOLVER [-o OUTPUT]
+               [-d DIVISOR] [-c INITIAL-CANDIDATE] [-v VERBOSE] [-h]
+
+optional arguments:
+  -i, --input, --instance INPUT
+                        Path to the instance file.
+  -f, --formulation FORMULATION
+                        P1 or P3.
+  -s, --solver SOLVER   Cbc or Gurobi.
+  -o, --output OUTPUT   Output file path. (default: "stdout")
+  -d, --divisor DIVISOR
+                        Divisor for valid inequality in P1. If set to
+                        -1, the new valid inequality is not
+                        considered. (default: "-1")
+  -c, --initial-candidate INITIAL-CANDIDATE
+                        Heuristic for hot start. Use default, random
+                        or 2approx. (default: "default")
+  -v, --verbose VERBOSE
+                        Enable verbose mode. 0 or 1. (default: "0")
+  -h, --help            show this help message and exit
 \end{lstlisting}
 
 %%%
