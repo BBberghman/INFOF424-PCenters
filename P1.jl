@@ -11,6 +11,7 @@ include("helpers/twoapprox_heuristic.jl")
 include("helpers/bestHeuristicRandom.jl")
 include("helpers/bestHeuristicTwoApprox.jl")
 include("helpers/obj_value.jl")
+include("helpers/compute_xij.jl")
 
 function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
 
@@ -48,6 +49,7 @@ function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
     elseif argInitialCandidate == "2approx"
       initial_candidate = bestHeuristicTwoApprox(instance)
     end
+    setvalue(z, obj_value(initial_candidate,instance))
     setvalue(y, initial_candidate)
   end
 
