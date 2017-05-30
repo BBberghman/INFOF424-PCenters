@@ -31,7 +31,7 @@ function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
 
   # Model
   if argSolver == "Cbc"
-    m = Model(solver = CbcSolver())
+    m = Model(solver = CbcSolver(verbose=argVerbose))
   elseif argSolver == "Gurobi"
     m = Model(solver = GurobiSolver(OutputFlag=argVerbose))
   end
@@ -49,7 +49,7 @@ function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
     elseif argInitialCandidate == "2approx"
       initial_candidate = bestHeuristicTwoApprox(instance)
     end
-    setvalue(x, compute_xij(initial_candidate,instance)
+    setvalue(x, compute_xij(initial_candidate,instance))
     setvalue(z, obj_value(initial_candidate,instance))
     setvalue(y, initial_candidate)
   end

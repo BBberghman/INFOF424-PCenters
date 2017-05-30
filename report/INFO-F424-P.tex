@@ -352,7 +352,9 @@ With Cbc, which is much more rudimentary, we could see astonishing improvements 
 
 \input{opt-div-search-3}
 
-There does not seem to be a global optimum for all instances, even though they have roughly the same distribution of distances. On instance 1, it seems to work great. On the two others, we have a curious behaviour: we have been asking ourselves why we could get times greater than before when adding a VI.
+There does not seem to be a global optimum for all instances, even though they have roughly the same distribution of distances. On instance 1, it seems to work great. On the two others, we have a curious behaviour: we have been asking ourselves why we could get times greater than before when adding a VI. We couldn't come up with a certain answer: perhaps our valid inequality is actually not valid, or it somehow makes Cbc shy away from the optimal solution, or again some other aspect we don't know of is involved. This is left as an open question.
+
+To conclude on this attempt to optimize, we ran several other tests (see the performance comparison in conclusion) and observed that this VI implementation didn't actually help in most cases, considering all instances.
 
 %\subsection{Cutting planes}
 
