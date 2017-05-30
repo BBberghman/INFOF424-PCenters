@@ -73,7 +73,7 @@ function main()
       result.score, "\t",
       result.time, "\n"
     )
-    if !isempty(parsed_args["output"])
+    if parsed_args["output"] != "stdout"
       try
         open(parsed_args["output"], "a") do f
           write(f, str)
@@ -83,7 +83,7 @@ function main()
       end
     end
 
-    println(str)
+    print(str)
 
 
 
