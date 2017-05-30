@@ -6,7 +6,7 @@ type PCInstance
   rho::Array{UInt16}
 end
 
-function describe_instance(instance)
+function describe_instance(instance::PCInstance)
   return string("PCInstance:\n",
     "- N:\t", instance.n, "\n",
     "- p:\t", instance.p, "\n"

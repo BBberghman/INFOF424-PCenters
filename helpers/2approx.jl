@@ -1,8 +1,8 @@
-function evaluate(instance, x)
+function evaluate(instance::PCInstance, x)
   return sum(instance.d[i,j] * x[i,j] for j = 1:instance.n)
 end
 
-function twoapprox_heuristic(instance)
+function twoapprox_heuristic(instance::PCInstance)
 
   # init center list
   centers = zeros(Int16,instance.p)

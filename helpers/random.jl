@@ -1,5 +1,6 @@
-# Create a random solution containing p centers
-function random_heuristic(instance)
+# Create a random solution containing exactly p centers
+function random_heuristic(instance::PCInstance)
+
     solution = zeros(UInt8,instance.n)
 
     for i = 1:instance.p                     # p centers
