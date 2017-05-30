@@ -3,3 +3,8 @@ instances/2.out	Gurobi	P1	-1	98	8.800147488
 instances/3.out	Gurobi	P1	-1	93	5.438785708
 instances/4.out	Gurobi	P1	-1	74	4.4241024
 instances/5.out	Gurobi	P1	-1	48	3.238803221
+instances/6.out	Gurobi	P1	-1	84	70.988078263
+instances/7.out	Gurobi	P1	-1	64	31.970220509
+instances/8.out	Gurobi	P1	-1	55	31.793153711
+instances/9.out	Gurobi	P1	-1	37	11.748812871
+instances/10.out	Gurobi	P1	-1	20	10.091597757
