@@ -2,7 +2,7 @@ function evaluate(instance, x)
   return sum(instance.d[i,j] * x[i,j] for j = 1:instance.n)
 end
 
-function make2approx(instance)
+function twoapprox_heuristic(instance)
 
   # init center list
   centers = zeros(Int16,instance.p)
