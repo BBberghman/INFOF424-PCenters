@@ -388,14 +388,7 @@ We see that the instances requiring the longest execution time are \texttt{6.out
     Note how we had to use a logarithmic scale for the vertical axis to keep the visualisation relevant. Indeed, Cbc could reach very long times compared to Gurobi.
 
     We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search. as it means that more points have to be associated to less centers: the number of points per center increases and so does the optimal $\rho_K$.
-    
-    
-    \subsection{Further improvement}
-    
-    As said before, P3 formulation with the Cbc Solver and the improvement made it possible to get the optimal solution of some of the instances in a relatively acceptable time. However not all instances were computed because the computational time would not be acceptable without more improvement. This suggests that more improvements needs to be done, especially to compete with Gubori.
-    
-    Some of the ideas to explore next are, among others, using Branch\&Bound and adding more valid inequalities. One could add inequalities with different divisors and thus have more valid inequalities. This was done briefly but not explored as it was hard to get a generalization due to the great variety of results.
-	
+
 	
 \pagebreak
 
@@ -406,7 +399,13 @@ Some values aren't present because they would simply require too much computatio
 
 To conclude on a high-level note, as long as we consider Gurobi, the change isn't so important: P3 is just a bit slower than P1. But for our implementations, the change is drastic: most of the time we aren't able to get optimal solutions in a decent computational time. This is likely to be thanks to the multiple optimizations implemented in Gurobi which make it more resistant to various formulations.
 
-
+    
+    \subsection{Further improvement}
+    
+    As said before, P3 formulation with the Cbc Solver and the improvement made it possible to get the optimal solution of some of the instances in a relatively acceptable time. However not all instances were computed because the computational time would not be acceptable without more optimization. This suggests that more improvements needs to be done, especially to compete with Gubori.
+    
+    Some of the ideas to explore in the next step are, among others, using Branch\&Bound and adding more valid inequalities. One could add inequalities with different divisors and thus have more valid inequalities. This was done briefly but not explored as it was hard to get a generalization due to the great variance within results.
+	
 
 	\subsection{Wrap-up}
 	This project gave us interesting insight on how to practically use solvers  and  in a way, how they worked internally. Comparing our own implementations with Gurobi was a challenging and exciting task as we could see our improvements make the execution times required to solve instances decrease and decrease over time.
