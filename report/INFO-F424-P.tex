@@ -380,17 +380,20 @@ First, let us show the optimal values we found for each instance:
 	\item \texttt{10.out}: 20
 \end{itemize}
 
-
-Next, let us see the execution time required for all instances:
-\input{gurobi-all-instances}
-
-
-We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search.
+We had the same results with both formulations.
 
 %Instance // Objective function // Example of solutions  // computational time (mean) //
 
 \section{Conclusion}
 	\subsection{Comparison of the two formulations}
+	Next, let us see the execution time required for all instances:
+	
+\input{time-all-instances}
+
+Note how we had to use a logarithmic scale for the vertical axis to keep the visualisation relevant. Indeed, Cbc could reach very long times compared to Gurobi.
+
+We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search.
+
 	
 	\subsection{Wrap-up}
 	This project gave us interesting insight on how to practically use solvers  and  in a way, how they worked internally. Comparing our own implementations with Gurobi was a challenging and exciting task as we could see our improvements make the execution times required to solve instances decrease and decrease over time.
