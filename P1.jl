@@ -8,6 +8,9 @@ include("helpers/read_instance.jl")
 include("helpers/print_solution.jl")
 include("helpers/random_heuristic.jl")
 include("helpers/twoapprox_heuristic.jl")
+include("helpers/bestHeuristicRandom.jl")
+include("helpers/bestHeuristicTwoApprox.jl")
+include("helpers/obj_value.jl")
 
 function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
 
@@ -41,9 +44,9 @@ function P1(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
   # Initial candidate
   if argInitialCandidate != "default"
     if argInitialCandidate == "random"
-      initial_candidate = random_heuristic(instance)
+      initial_candidate = bestHeuristicRandom(instance)
     elseif argInitialCandidate == "2approx"
-      initial_candidate = twoapprox_heuristic(instance)
+      initial_candidate = bestHeuristicTwoApprox(instance)
     end
     setvalue(y, initial_candidate)
   end

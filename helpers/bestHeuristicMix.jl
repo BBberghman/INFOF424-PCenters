@@ -1,7 +1,7 @@
 #Select the best solution out of 10 solutions found by the 2-approx heuristic and 1000 random solutions
 function bestHeuristicMix(instance::PCInstance)
-    nb1 = 10;
-    nb2 = 1000;
+    nb1 = 500;
+    nb2 = 500;
     nb = nb1 + nb2;
 
     solution = Array(UInt8,instance.n,nb)
@@ -17,9 +17,9 @@ function bestHeuristicMix(instance::PCInstance)
         solution[:,i] = random_heuristic(instance);
         obj[i] = obj_value(solution[:,i], instance);
     end;
-    println(maximum(obj));
+    #println(maximum(obj));
     bestZ = minimum(obj);
-    println(bestZ)
+    #println(bestZ)
     solution = solution[:,find(bestZ)];
 
     return solution

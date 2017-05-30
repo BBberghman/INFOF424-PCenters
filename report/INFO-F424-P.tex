@@ -55,13 +55,42 @@ Charles \textsc{Hamesse} \\
 \subsection{Implementation}
 
 \subsection{Compiling and running}
- 
-\paragraph{Compiling}
+As Julia is a scripting language, nothing needs to be compiled. However, one might have to install the following packages to ensure the correction functioning of our program:
+\begin{itemize}
+	\item \texttt{ArgParse}: used to parse command-line arguments
+	\item \texttt{Cbc}: a simple LP solver
+	\item \texttt{Gurobi}: a more complex, commercial LP solver
+\end{itemize}
 
-\paragraph{Running}
-Some example runs:
+To launch the program or use it in a bash script, one only needs to \texttt{cd} to the root directory of our archive and enter:
+
 \begin{lstlisting}
-code
+julia main.jl
+\end{lstlisting}
+
+We implemented a simple yet complete human-machine interface which is well described using \texttt{-h} or \texttt{--help}:
+\begin{lstlisting}
+>>> julia main.jl -h
+usage: main.jl -i INPUT -f FORMULATION -s SOLVER [-o OUTPUT]
+               [-d DIVISOR] [-c INITIAL-CANDIDATE] [-v VERBOSE] [-h]
+
+optional arguments:
+  -i, --input, --instance INPUT
+                        Path to the instance file.
+  -f, --formulation FORMULATION
+                        P1 or P3.
+  -s, --solver SOLVER   Cbc or Gurobi.
+  -o, --output OUTPUT   Output file path. (default: "stdout")
+  -d, --divisor DIVISOR
+                        Divisor for valid inequality in P1. If set to
+                        -1, the new valid inequality is not
+                        considered. (default: "-1")
+  -c, --initial-candidate INITIAL-CANDIDATE
+                        Heuristic for hot start. Use default, random
+                        or 2approx. (default: "default")
+  -v, --verbose VERBOSE
+                        Enable verbose mode. 0 or 1. (default: "0")
+  -h, --help            show this help message and exit
 \end{lstlisting}
 
 %%%
@@ -314,19 +343,43 @@ The divisor parameter has been optimized blablabla.
 
 \input{optimizations-divisor-search}
 
-\input{optimizations-divisor-search-2}
 
 \input{opt-div-search-3}
 Multiple divisors have been used to add multiple ensemble of constraints.
 
 With Gurobi there is not much improvement. However with another solver as Cbc we can see an improvement in the computational time. 
 
-\subsection{Cutting planes}
+%\subsection{Cutting planes}
 
+
+%%%
+%%%
+%%%
+%%%
+%%%
+%%%
 
 \section{Results}
 
+First, let us show the optimal values we found for each instance:
+\begin{itemize}
+	\item \texttt{1.out}: 127
+	\item \texttt{2.out}: 98
+	\item \texttt{3.out}: 93
+	\item \texttt{4.out}: 74
+	\item \texttt{5.out}: 48
+	\item \texttt{6.out}: 84
+	\item \texttt{7.out}: 64
+	\item \texttt{8.out}: 55
+	\item \texttt{9.out}: 37
+	\item \texttt{10.out}: 20
+\end{itemize}
+
+
+Next, let us see the execution time required for all instances:
 \input{gurobi-all-instances}
+
+
 We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search.
 
  Instance // Objective function // Example of solutions  // computational time (mean) //
@@ -335,7 +388,9 @@ We see that the instances requiring the longest execution time are \texttt{6.out
 
 \section{Conclusion}
 	\subsection{Comparison of the two formulations}
+	
 	\subsection{Wrap-up}
+	This project gave us interesting insight on how to practically use solvers  and  in a way, how they worked internally. Comparing our own implementations with Gurobi was a challenging and exciting task as we could see our improvements make the execution times required to solve instances decrease and decrease over time.
 	
 
 \end{document}

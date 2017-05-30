@@ -8,6 +8,9 @@ include("helpers/read_instance.jl")
 include("helpers/print_solution.jl")
 include("helpers/random_heuristic.jl")
 include("helpers/twoapprox_heuristic.jl")
+include("helpers/bestHeuristicRandom.jl")
+include("helpers/bestHeuristicTwoApprox.jl")
+include("helpers/obj_value.jl")
 
 function P3(argInstance, argSolver, argInitialCandidate, argDivisor, argVerbose)
 
