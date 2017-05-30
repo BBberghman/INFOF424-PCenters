@@ -4,3 +4,9 @@ instances/6.out	Cbc	P1	default	75	84	618.892202153
 instances/6.out	Cbc	P1	default	100	84	846.166129011
 instances/6.out	Cbc	P1	default	125	84	615.909566071
 instances/6.out	Cbc	P1	default	150	84	421.91845072
+instances/6.out	Cbc	P1	default	175	84	439.984720751
+instances/6.out	Cbc	P1	default	200	84	437.362797156
+instances/7.out	Cbc	P1	default	25	64	378.060025533
+instances/7.out	Cbc	P1	default	50	64	183.274003226
+instances/7.out	Cbc	P1	default	75	64	353.392183979
+instances/7.out	Cbc	P1	default	100	64	354.573378593

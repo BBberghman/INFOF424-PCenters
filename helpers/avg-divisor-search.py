@@ -18,15 +18,16 @@ def make():
         divisor = int(data[4])
         time = float(data[6])
         instance = data[0]
+        deviation = time/ref_times[instance]
         if instance == "instances/3.out":
-            print(str(divisor) + " " + str(time) + " c")
-        avg[divisor] += time
+            print(str(divisor) + " " + str(deviation) + " c")
+        avg[divisor] += deviation
 '''
     for i in range(len(avg)):
         avg[i] /= 3
         if avg[i] > 0:
             print(str(i) + "\t" + str(avg[i]))
-'''
+    '''
 def main():
     make()
 
