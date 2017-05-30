@@ -286,7 +286,7 @@ This inequation is used in constraint (\ref{eq:2}) of $P_1$ with a factor called
 	 \sum_{j \in N} \left \lfloor{d_{ij}/divisor}\right \rfloor x_{ij} &\leq& z/divisor \label{eq:2_VI}
 	\end{eqnarray}
 	
-The divisor parameter has been optimized blablabla.
+We tried looking for a value of the divisor which would improve the performance as much as possible. It is clear that the strength of the inequality depends on how the floor operation cuts the numbers. So both the values in the distance matrix and the divisor have an important impact. Let us run our program using Cbc on the first instance to have some insight on how the divisor impacts the execution time:
 
 \input{optimizations-divisor-search}
 
@@ -329,9 +329,7 @@ Next, let us see the execution time required for all instances:
 
 We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search.
 
- Instance // Objective function // Example of solutions  // computational time (mean) //
-
-
+%Instance // Objective function // Example of solutions  // computational time (mean) //
 
 \section{Conclusion}
 	\subsection{Comparison of the two formulations}
