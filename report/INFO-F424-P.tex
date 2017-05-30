@@ -290,7 +290,6 @@ The divisor parameter has been optimized blablabla.
 
 \input{optimizations-divisor-search}
 
-\input{optimizations-divisor-search-2}
 
 \input{opt-div-search-3}
 Multiple divisors have been used to add multiple ensemble of constraints.
@@ -302,7 +301,23 @@ With Gurobi there is not much improvement. However with another solver as Cbc we
 
 \section{Results}
 
+First, let us show the optimal values we found for each instance:
+\begin{itemize}
+	\item \texttt{1.out}: 127
+	\item \texttt{2.out}: 98
+	\item \texttt{3.out}: 93
+	\item \texttt{4.out}: 74
+	\item \texttt{5.out}: 48
+	\item \texttt{6.out}: 84
+	\item \texttt{7.out}: 64
+	\item \texttt{8.out}: 55
+	\item \texttt{9.out}: 37
+	\item \texttt{10.out}: 20
+\end{itemize}
+
 \input{gurobi-all-instances}
+
+
 We see that the instances requiring the longest execution time are \texttt{6.out} and \texttt{7.out}. Not only they have a large number of vertices ($N = $ 200), but also a very low $p$ value, respectively 5 and 10. Intuitively, this low $p$ combined with a high $N$ increase the difficulty of the search.
 
  Instance // Objective function // Example of solutions  // computational time (mean) //
